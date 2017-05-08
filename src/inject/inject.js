@@ -7,15 +7,22 @@ const RedditUserStalker = () => {
 
   const attach = () => {
     const authorLinkElements = Array.from(document.querySelectorAll('.author'))
+    const styles = {
+      color: 'brown',
+      display: 'inline-block',
+      padding: '3px 5px',
+      backgroundColor: 'rgba(0,0,0,0.2)',
+      marginLeft: '10px',
+      fontSize: '10px !important',
+      cursor: 'pointer',
+    }
     authorLinkElements.forEach(el => {
       const username = el.innerText
       const icon = document.createElement('a')
       icon.innerText = 'STALK'
-      icon.style.color = 'orangered'
-      icon.style.display = 'inline-block'
-      icon.style.padding = '3px 5px'
-      icon.style.backgroundColor = 'black'
-      icon.style.opacity = '0.2'
+      for (let i in styles) {
+        icon.style[i] = styles[i]
+      }
       el.parentNode.appendChild(icon)
       icon.addEventListener('click', (e) => {
         e.preventDefault()
@@ -38,10 +45,8 @@ const RedditUserStalker = () => {
 
   const reactToStalkData = (data) => {
     const rows = data.children
-    const subreddits = rows.map(row => {
-      return row.data.subbreddit
-    })
-    alert(subreddits)
+    const subreddits = [...new Set(rows.map(row => row.data.subreddit))]
+    alert('This user is active in at least the following subs:\n\n' + subreddits.join('\n'))
   }
 
   return {
