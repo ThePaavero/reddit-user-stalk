@@ -38,15 +38,15 @@ const RedditUserStalker = () => {
         return response.json()
       })
       .then(data => {
-        reactToStalkData(data.data)
+        reactToStalkData(username, data.data)
       })
       .catch(console.error)
   }
 
-  const reactToStalkData = (data) => {
+  const reactToStalkData = (username, data) => {
     const rows = data.children
     const subreddits = [...new Set(rows.map(row => row.data.subreddit))]
-    alert('This user is active in at least the following subs:\n\n' + subreddits.join('\n'))
+    alert('"' + username + '" is active in at least the following subs:\n\n' + subreddits.join('\n'))
   }
 
   return {
