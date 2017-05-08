@@ -3,6 +3,7 @@ const RedditUserStalker = () => {
   const init = () => {
     console.log('RedditUserStalker is active.')
     attach()
+    setInterval(attach, 2000)
   }
 
   const attach = () => {
@@ -16,7 +17,12 @@ const RedditUserStalker = () => {
       fontSize: '10px !important',
       cursor: 'pointer',
     }
+    const processedAttributeName = 'data-reddit-user-stalker-processed'
     authorLinkElements.forEach(el => {
+      if (el.getAttribute(processedAttributeName)) {
+        return
+      }
+      el.setAttribute(processedAttributeName, true)
       const username = el.innerText
       const icon = document.createElement('a')
       icon.innerText = 'STALK'
