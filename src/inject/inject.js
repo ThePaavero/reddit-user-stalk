@@ -54,9 +54,9 @@ const RedditUserStalker = () => {
   }
 }
 
-chrome.extension.sendMessage({}, function (response) {
-  const readyStateCheckInterval = setInterval(function () {
-    if (document.readyState === "complete") {
+chrome.extension.sendMessage({}, () => {
+  const readyStateCheckInterval = setInterval(() => {
+    if (document.readyState === 'complete') {
       clearInterval(readyStateCheckInterval)
       RedditUserStalker().init()
     }
