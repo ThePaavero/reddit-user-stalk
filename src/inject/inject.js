@@ -31,9 +31,17 @@ const RedditUserStalker = () => {
         return response.json()
       })
       .then(data => {
-        console.log('DATA:', data)
+        reactToStalkData(data.data)
       })
       .catch(console.error)
+  }
+
+  const reactToStalkData = (data) => {
+    const rows = data.children
+    const subreddits = rows.map(row => {
+      return row.data.subbreddit
+    })
+    alert(subreddits)
   }
 
   return {
