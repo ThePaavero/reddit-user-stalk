@@ -11,8 +11,6 @@ const RedditUserStalker = () => {
     const styles = {
       color: 'brown',
       display: 'inline-block',
-      padding: '3px 5px',
-      backgroundColor: 'rgba(0,0,0,0.2)',
       marginLeft: '10px',
       fontSize: '10px !important',
       cursor: 'pointer',
@@ -25,7 +23,7 @@ const RedditUserStalker = () => {
       el.setAttribute(processedAttributeName, true)
       const username = el.innerText
       const icon = document.createElement('a')
-      icon.innerText = 'STALK'
+      icon.innerText = '💩'
       for (let i in styles) {
         icon.style[i] = styles[i]
       }
