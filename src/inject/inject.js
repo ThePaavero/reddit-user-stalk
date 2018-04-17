@@ -30,27 +30,33 @@ const RedditUserStalker = () => {
       el.parentNode.appendChild(icon)
       icon.addEventListener('click', (e) => {
         e.preventDefault()
-        stalk(username)
+        stalk(username, e)
       })
     })
   }
 
-  const stalk = (username) => {
+  const stalk = (username, e) => {
     const rssUrl = 'https://www.reddit.com/user/' + username + '/.json'
     fetch(rssUrl)
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
-        reactToStalkData(username, data.data)
-      })
-      .catch(console.error)
+    .then(response => {
+      return response.json()
+    })
+    .then(data => {
+      reactToStalkData(username, data.data, e)
+    })
+    .catch(console.error)
   }
 
-  const reactToStalkData = (username, data) => {
+  const showModal = (username, subs, x, y) => {
+    console.log(x, y)
+    window.alert('"' + username + '" is active in at least the following subs:\n\n' + subs.join('\n'))
+  }
+
+  const reactToStalkData = (username, data, e) => {
     const rows = data.children
-    const subreddits = [...new Set(rows.map(row => row.data.subreddit))]
-    alert('"' + username + '" is active in at least the following subs:\n\n' + subreddits.join('\n'))
+    const subs = [...new Set(rows.map(row => row.data.subreddit))]
+    // alert('"' + username + '" is active in at least the following subs:\n\n' + subs.join('\n'))
+    showModal(username, subs, e.clientX, e.clientY)
   }
 
   return {
