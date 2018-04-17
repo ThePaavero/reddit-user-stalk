@@ -47,12 +47,16 @@ const RedditUserStalker = () => {
     .catch(console.error)
   }
 
+  const removeModals = () => {
+    document.querySelector('.redditUserStalker-modal-wrapper').remove()
+  }
+
   const showModal = (username, subs, x, y) => {
 
     const subList = subs.map(s => {
       return `
         <li>
-          <a href="https://www.reddit.com/r/${s}">
+          <a href="https://www.reddit.com/r/${s}" target="_blank">
             ${s}
           </a>
         </li>
@@ -60,6 +64,7 @@ const RedditUserStalker = () => {
     }).join('')
 
     let markup = `
+      <button>×</button>
       <h2>${username}</h2>
       <h3>Active in at least the following subs:</h3>
       <ul>
@@ -72,6 +77,10 @@ const RedditUserStalker = () => {
     modalWrapper.style.left = x + 'px'
     modalWrapper.style.top = y + 'px'
     document.body.appendChild(modalWrapper)
+    const closeButton = modalWrapper.querySelector('button')
+    closeButton.addEventListener('click', e => {
+      removeModals()
+    })
   }
 
   const reactToStalkData = (username, data, e) => {

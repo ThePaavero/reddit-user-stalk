@@ -8,8 +8,24 @@
     padding: 10px;
     color: #000;
     font-size: 11px;
+    border-radius: 1px;
 }
 
 .redditUserStalker-modal-wrapper a {
     color: inherit;
+    text-decoration: underline;
+}
+
+.redditUserStalker-modal-wrapper button {
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    text-decoration: none;
+    color: inherit;
+    border: none;
+    background: none;
+    display: block;
+    padding: 5px;
+    font-size: 15px;
 }
