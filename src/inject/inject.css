@@ -1,0 +1,15 @@
+.redditUserStalker-modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 20px;
+    min-height: 20px;
+    background-color: #e3f86f;
+    padding: 10px;
+    color: #000;
+    font-size: 11px;
+}
+
+.redditUserStalker-modal-wrapper a {
+    color: inherit;
+}

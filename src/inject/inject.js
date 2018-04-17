@@ -48,14 +48,35 @@ const RedditUserStalker = () => {
   }
 
   const showModal = (username, subs, x, y) => {
-    console.log(x, y)
-    window.alert('"' + username + '" is active in at least the following subs:\n\n' + subs.join('\n'))
+
+    const subList = subs.map(s => {
+      return `
+        <li>
+          <a href="https://www.reddit.com/r/${s}">
+            ${s}
+          </a>
+        </li>
+      `
+    }).join('')
+
+    let markup = `
+      <h2>${username}</h2>
+      <h3>Active in at least the following subs:</h3>
+      <ul>
+        ${subList}
+      </ul>
+    `
+    const modalWrapper = document.createElement('div')
+    modalWrapper.className = 'redditUserStalker-modal-wrapper'
+    modalWrapper.innerHTML = markup
+    modalWrapper.style.left = x + 'px'
+    modalWrapper.style.top = y + 'px'
+    document.body.appendChild(modalWrapper)
   }
 
   const reactToStalkData = (username, data, e) => {
     const rows = data.children
     const subs = [...new Set(rows.map(row => row.data.subreddit))]
-    // alert('"' + username + '" is active in at least the following subs:\n\n' + subs.join('\n'))
     showModal(username, subs, e.clientX, e.clientY)
   }
 
